@@ -3241,9 +3241,9 @@ body {
 </head>
 <body>
 <header class="site-header">
-  <div class="header-eyebrow">Family Relocation Research · 2026 · v6.96</div>
+  <div class="header-eyebrow">Family Relocation Research · 2026 · v6.97</div>
   <h1 class="header-title">Where Next</h1>
-  <p class="header-sub">A working research tool comparing <em>87 locations</em> globally. Each row expands for full descriptions, land costs in USD, and immigration complexity. Built to grow.</p>
+  <p class="header-sub">A working research tool comparing <em><span id="city-count">87</span> locations</em> globally. Each row expands for full descriptions, land costs in USD, and immigration complexity. Built to grow.</p>
 </header>
 <div class="controls-wrap">
   <div class="controls-inner mode-primary-row">
@@ -4362,6 +4362,8 @@ function closeLightbox(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
+  const cityCountEl=document.getElementById('city-count');
+  if(cityCountEl) cityCountEl.textContent=CITIES.length;
   const lbClose=document.getElementById('lb-close');
   const lbPrev=document.getElementById('lb-prev');
   const lbNext=document.getElementById('lb-next');
