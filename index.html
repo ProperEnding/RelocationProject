@@ -3241,7 +3241,7 @@ body {
 </head>
 <body>
 <header class="site-header">
-  <div class="header-eyebrow">Family Relocation Research · 2026 · v6.99</div>
+  <div class="header-eyebrow">Family Relocation Research · 2026 · v6.100</div>
   <h1 class="header-title">Where Next</h1>
   <p class="header-sub">A working research tool comparing <em><span id="city-count">87</span> locations</em> globally. Each row expands for full descriptions, land costs in USD, and immigration complexity. Built to grow.</p>
 </header>
@@ -4552,13 +4552,12 @@ function renderList(){
       const photoHtml=city.photo
         ?`<img src="${city.photo}" alt="${city.name}" loading="lazy" onerror="this.style.display='none';this.parentNode.style.background='${placeholderColor}';">`
         :``;
-      // Rank pill — only in top10Mode; global rank across all non-ref cities by live score
+      // Rank pill — global top-10 by current weights, shown in all modes so you
+      // can see which cities are in the top 10 even when filtering by region/favs.
       let rankPillHtml = '';
-      if(top10Mode){
-        const allRanked=[...CITIES].filter(c=>c.region!=='ref').sort((a,b)=>b._score-a._score);
-        const rankPos=allRanked.findIndex(c=>c.id===city.id)+1;
-        const pillClass=rankPos>0&&rankPos<=10?'rank-pill-top':'rank-pill-rest';
-        rankPillHtml=`<span class="rank-pill ${pillClass}">${rankPos}</span>`;
+      const rankPos=top10ids.indexOf(city.id)+1;
+      if(rankPos>0){
+        rankPillHtml=`<span class="rank-pill rank-pill-top">${rankPos}</span>`;
       }
       const scoreOn10 = city._score * 2;
       const scoreFormatted = scoreOn10.toFixed(1);
